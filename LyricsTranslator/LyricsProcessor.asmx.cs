@@ -21,7 +21,8 @@ namespace LyricsTranslator
     /// Transform linebreaks is a function that transforms "\n" and "\r" into htlm breaks.
     /// TranslateEnglishToDutch translates a provided ENGLISH text to DUTCH
     /// </summary>
-    [WebService(Namespace = "http://tempuri.org/")]
+    /// [WebService(Namespace = "http://tempuri.org/")]
+    [WebService(Namespace = "https://lyricstranslator.azurewebsites.net/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
