@@ -33,14 +33,14 @@ namespace LyricsTranslator
         [WebMethod]
         public string AddLineBreaksHTML(string lyrics)
         {
-            //char[] lyricsChar = lyrics.ToCharArray();
+			//This method serves to try and add HTML breaks to a text. It tries to do that by identifying capital letters, and analyzing if
+			//it is appropriate to set a <br> before that capital letter.
             int length = lyrics.Count();
             int i = 0;
             List<int> breaks = new List<int>();
 
             //Keep track of average sentence length
             List<int> sentenceLengths = new List<int>();
-            //double averageSentenceLength = 0;
             while (i < length)
             {
                 if (IsCapital(lyrics[i]))
@@ -54,7 +54,6 @@ namespace LyricsTranslator
                             double avg = ((sentenceLengths.Count > 0) ? sentenceLengths.Average() : 0.0);
                             if (currentSentenceLength > 0.75 * avg)
                             {
-                                //System.Diagnostics.Debug.WriteLine("test");
                                 sentenceLengths.Add(currentSentenceLength);
                                 breaks.Add(i - 1);
                             }
@@ -69,7 +68,6 @@ namespace LyricsTranslator
                 i++;
             }
 
-            //return lyrics;
             return AddBreaks(lyrics, breaks, length);
         }
 
@@ -143,35 +141,20 @@ namespace LyricsTranslator
 
         private string AddBreaks(string lyrics, List<int> breaks, int length)
         {
-            //char[] updatedCharArray = new char[length + breaks.Count * 4];
             string updatedLyrics = "";
             int i = 0; //For the original charArray
-            //int j = 0; //For the updated  charArray
             int b = 0; //For the list with breaks
             while (i < length)
             {
                 updatedLyrics = String.Concat(updatedLyrics, lyrics[i]);
-                //updatedCharArray[j] = lyrics[i];
                 if (breaks[b] == i)
                 {
                     updatedLyrics = String.Concat(updatedLyrics, "<br>");
-                    /*
-                    j++;
-                    updatedCharArray[j] = '<';
-                    j++;
-                    updatedCharArray[j] = 'b';
-                    j++;
-                    updatedCharArray[j] = 'r';
-                    j++;
-                    updatedCharArray[j] = '>';
-                    */
                     if (b < breaks.Count - 1) b++;
                 }
                 i++;
                 //j++;
             }
-            //Console.WriteLine(updatedCharArray);
-            //return updatedCharArray.ToString();
             return updatedLyrics;
         }
     }

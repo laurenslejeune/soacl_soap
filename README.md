@@ -1,0 +1,1 @@
+[Online](https://lyricstranslator.azurewebsites.net/LyricsProcessor.asmx)
